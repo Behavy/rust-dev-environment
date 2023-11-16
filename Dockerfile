@@ -18,7 +18,7 @@ ENV PATH=$CARGO_HOME/bin:$PATH
 ARG SSH_PUBLIC_KEY_PATH=
 
 # Create directories
-RUN mkdir -p /workspace
+RUN mkdir -p /workspace/target
 
 
 # Install dependencies
@@ -50,8 +50,16 @@ USER $USERNAME
 COPY . /workspace
 WORKDIR /workspace
 
+COPY .bash_aliases /home/$USERNAME/.bash_aliases
+
+COPY .bashrc /home/$USERNAME/.bashrc
+
+# Enable our git hooks and set the permisisons on docker sock.
+RUN echo 'git config core.hooksPath /workspace/.devcontainer/.githooks' >> ~/.bashrc
+
 
 # Default command
+CMD [ "tail", "-f", "/dev/null"]
 CMD ["bash"]
 
 
