@@ -1,0 +1,23 @@
+version: '3.7'
+services:
+  development:
+    build: https://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@github.com/Behavy/rust-dev-environment.git
+    volumes:
+      - ..:/workspace:cached
+      - ~/.ssh:/usr/vscode/.ssh:cached # Give access to ssh keys on the host
+      - /var/run/docker.sock:/var/run/docker.sock # We need this so docker in docker works
+      - target:/workspace/target # Set target as a volume for performance. 
+  # database:
+  #   image: postgres:16-alpine
+  #   environment:
+  #     POSTGRES_PASSWORD: password
+  #     POSTGRES_USER: user
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "pg_isready -U vscode"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 3
+
+volumes:
+  target:
+  # postgres:
