@@ -50,8 +50,8 @@ USER $USERNAME
 COPY . $WORKSPACE_HOME
 WORKDIR $WORKSPACE_HOME
 
-COPY .bashrc /home/$USERNAME/.bashrc
-COPY .bash_aliases /home/$USERNAME/.bash_aliases
+COPY $WORKSPACE_HOME/.bashrc /home/$USERNAME/.bashrc
+COPY $WORKSPACE_HOME/.bash_aliases /home/$USERNAME/.bash_aliases
 
 # Enable our git hooks and set the permisisons on docker sock.
 RUN echo 'git config core.hooksPath $WORKSPACE_HOME/.devcontainer/.githooks' >> ~/.bashrc
