@@ -18,7 +18,7 @@ ENV PATH=$CARGO_HOME/bin:$PATH
 ARG SSH_PUBLIC_KEY_PATH=
 
 # Create directories
-RUN mkdir -p /workspace/target
+RUN mkdir -p $WORKSPACE_HOME/target
 
 
 # Install dependencies
@@ -42,19 +42,19 @@ RUN cargo install sqlx-cli --no-default-features --features postgres
 # User setup
 RUN groupadd --gid $USER_GID $USERNAME
 RUN useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME
-RUN chown -R $USERNAME:$USERNAME /workspace
+RUN chown -R $USERNAME:$USERNAME $WORKSPACE_HOME
 USER $USERNAME
 
 
 # Add project files
-COPY . /workspace
-WORKDIR /workspace
+COPY . $WORKSPACE_HOME
+WORKDIR $WORKSPACE_HOME
 
-RUN cp .devcontainer/.bashrc /home/$USERNAME/.bashrc
-RUN cp .devcontainer/.bash_aliases /home/$USERNAME/.bash_aliases
+RUN cp $WORKSPACE_HOME/.devcontainer/.bashrc /home/$USERNAME/.bashrc
+RUN cp $WORKSPACE_HOME/.devcontainer/.bash_aliases /home/$USERNAME/.bash_aliases
 
 # Enable our git hooks and set the permisisons on docker sock.
-RUN echo 'git config core.hooksPath /workspace/.devcontainer/.githooks' >> ~/.bashrc
+RUN echo 'git config core.hooksPath $WORKSPACE_HOME/.devcontainer/.githooks' >> ~/.bashrc
 
 
 # Default command
@@ -63,8 +63,6 @@ CMD ["bash"]
 
 
 # TODO : Supprimer
-# RUN |8 CLOAK_VERSION=1.19.4 DBMATE_VERSION=2.7.0 MOLD_VERSION=2.3.2 EARTHLY_VERSION=0.7.21 DOCKER_COMPOSE_VERSION=2.23.0 USERNAME=vscode USER_UID=1000 USER_GID=1000 /bin/sh -c apt-get -y update     
-# RUN apt-get install -y --no-install-recommends         git         curl         wget         ssh         sudo         jq         build-essential         protobuf-compiler         musl-dev         musl-tools         musl         apt-transport-https         ca-certificates         gnupg-agent         gnupg         software-properties-common         postgresql-client         npm         nodejs     
 # RUN install -m 0755 -d /etc/apt/keyrings     
 # RUN curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg     
 # RUN chmod a+r /etc/apt/keyrings/docker.gpg     
