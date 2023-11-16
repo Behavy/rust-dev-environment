@@ -58,7 +58,7 @@ RUN echo 'git config core.hooksPath $WORKSPACE_HOME/.devcontainer/.githooks' >> 
 
 
 # Default command
-CMD [ "tail", "-f", "/dev/null"]
+CMD [ "sleep", "infinity" ]
 CMD ["bash"]
 
 
