@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   development:
-    image: ghcr.io/behavy/rust-dev-environment
+    build: ghcr.io/behavy/rust-dev-environment
     volumes:
       - ..:/workspace:cached
       - ~/.ssh:/usr/vscode/.ssh:cached # Give access to ssh keys on the host
