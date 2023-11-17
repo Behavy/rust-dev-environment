@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   development:
-    build: https://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@github.com/Behavy/rust-dev-environment.git
+    image: quentinlcs/rust-dev-environment
     volumes:
       - ..:/workspace:cached
       - ~/.ssh:/usr/vscode/.ssh:cached # Give access to ssh keys on the host
