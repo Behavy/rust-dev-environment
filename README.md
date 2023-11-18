@@ -5,24 +5,18 @@
 ### 1. Build and run the docker images
 
 ``` sh
-docker rm -f rust-dev-environment;
-docker-compose up -id;
+docker-compose stop;
+docker-compose rm;
+docker-compose up -d;
 ```
 
-### 2. Running a container from the image we built
+### 2. Opening a terminal inside of the container
 
 ``` sh
-docker rm -f rust-dev
-docker run --name rust-dev --detach --interactive rust-dev-image
+docker exec -it devcontainer-development-1 bash;
 ```
 
-### 3. Opening a terminal inside of the container
-
-``` sh
-docker exec -it rust-dev bash
-```
-
-### 4. Exit the container's terminal
+### 3. Exit the container's terminal
 
 ``` sh
 exit
