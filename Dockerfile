@@ -57,11 +57,6 @@ RUN cp $WORKSPACE_HOME/.devcontainer/.bash_aliases /home/$USERNAME/.bash_aliases
 RUN echo 'git config core.hooksPath $WORKSPACE_HOME/.devcontainer/.githooks' >> ~/.bashrc
 
 
-# Default command
-CMD [ "sleep", "infinity" ]
-CMD ["bash"]
-
-
 # TODO : Supprimer
 # RUN install -m 0755 -d /etc/apt/keyrings     
 # RUN curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg     
