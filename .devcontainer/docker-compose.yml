@@ -1,14 +1,18 @@
 version: '3.7'
+
 services:
+
   development:
-    build: ghcr.io/behavy/rust-dev-environment
+    image: quentinlcs/rust-dev-environment
     volumes:
       - ..:/workspace:cached
       - ~/.ssh:/usr/vscode/.ssh:cached # Give access to ssh keys on the host
       - /var/run/docker.sock:/var/run/docker.sock # We need this so docker in docker works
       - target:/workspace/target # Set target as a volume for performance. 
     # depends_on:
-      # - database
+    #   - database
+    command: sleep infinity # Overrides default command so things don't shut down after the process ends.
+  
   # database:
   #   image: postgres:16-alpine
   #   environment:
@@ -22,4 +26,3 @@ services:
 
 volumes:
   target:
-  # postgres:
