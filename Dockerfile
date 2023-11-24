@@ -50,7 +50,7 @@ RUN chmod -R a+w $RUSTUP_HOME $CARGO_HOME;
 USER $USERNAME
 
 # SSH setup
-COPY $SSH_PATH /usr/vscode/.ssh
+COPY $SSH_PATH /home/$USERNAME/.ssh
 
 # Add project files
 COPY . $WORKSPACE_HOME
