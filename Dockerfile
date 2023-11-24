@@ -35,15 +35,11 @@ RUN apt clean -y
 RUN rm -r /var/cache/* /var/lib/apt/lists/*     
 
 
-# Rust
+# -- Rust
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain $RUST_VERSION
 
 RUN cargo install cargo-watch
 RUN cargo install sqlx-cli --no-default-features --features postgres
-
-# Bash setup
-RUN cp $WORKSPACE_HOME/.devcontainer/.bashrc /home/$USERNAME/.bashrc
-RUN cp $WORKSPACE_HOME/.devcontainer/.bash_aliases /home/$USERNAME/.bash_aliases
 
 # SSH setup
 COPY $SSH_PATH /home/$USERNAME/.ssh
@@ -51,13 +47,17 @@ COPY $SSH_PATH /home/$USERNAME/.ssh
 # User setup
 RUN groupadd --gid $USER_GID $USERNAME
 RUN useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME
-RUN chown -R $USERNAME:$USERNAME $WORKSPACE_HOME
-RUN chmod -R a+w $RUSTUP_HOME $CARGO_HOME;
+RUN chown -R $USERNAME:$USERNAME $WORKSPACE_HOME 
+RUN chown -R $USERNAME:$USERNAME /home/$USERNAME
+RUN chmod -R a+w $RUSTUP_HOME $CARGO_HOME
 USER $USERNAME
 
 # Add project files
 COPY . $WORKSPACE_HOME
 WORKDIR $WORKSPACE_HOME
+
+RUN cp $WORKSPACE_HOME/.devcontainer/.bashrc /home/$USERNAME/.bashrc
+RUN cp $WORKSPACE_HOME/.devcontainer/.bash_aliases /home/$USERNAME/.bash_aliases
 
 RUN git config --global --add safe.directory /workspace
 RUN git config --global user.name $GIT_NAME
