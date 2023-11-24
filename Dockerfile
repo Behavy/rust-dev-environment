@@ -29,7 +29,6 @@ RUN apt upgrade
 RUN apt -y install curl
 RUN apt -y install gcc
 RUN apt -y install git
-RUN apt -y install openssl
 RUN apt -y install libssl-dev
 RUN apt autoremove -y
 RUN apt clean -y     
@@ -41,6 +40,7 @@ RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain $RUST_VERSI
 
 RUN cargo install cargo-watch
 RUN cargo install sqlx-cli --no-default-features --features postgres
+RUN cargo install openssl --no-default-features --features vendored
 
 # SSH setup
 COPY $SSH_PATH /home/$USERNAME/.ssh
