@@ -15,8 +15,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 ENV PATH=$CARGO_HOME/bin:$PATH
 
-ARG GIT_NAME
-ARG GIT_EMAIL
+ARG GIT_NAME=undefined
+ARG GIT_EMAIL=undefined
 ARG SSH_PATH
 
 # Create directories
