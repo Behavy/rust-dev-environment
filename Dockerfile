@@ -15,7 +15,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 ENV PATH=$CARGO_HOME/bin:$PATH
 
-ARG SSH_PUBLIC_KEY_PATH=
+ARG SSH_PATH
 
 # Create directories
 RUN mkdir -p $WORKSPACE_HOME/target
@@ -45,6 +45,8 @@ RUN useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME
 RUN chown -R $USERNAME:$USERNAME $WORKSPACE_HOME
 USER $USERNAME
 
+# SSH setup
+COPY $SSH_PATH /usr/vscode/.ssh
 
 # Add project files
 COPY . $WORKSPACE_HOME
