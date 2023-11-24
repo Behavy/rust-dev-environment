@@ -29,7 +29,7 @@ RUN apt upgrade
 RUN apt -y install curl
 RUN apt -y install gcc
 RUN apt -y install git
-RUN apt -y install libssl-dev
+RUN apt -y install pkg-config
 RUN apt autoremove -y
 RUN apt clean -y     
 RUN rm -r /var/cache/* /var/lib/apt/lists/*     
