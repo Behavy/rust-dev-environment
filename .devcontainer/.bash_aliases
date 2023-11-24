@@ -43,5 +43,5 @@ we() {
 
 
 # Database
-alias dbmate='dbmate --no-dump-schema --migrations-dir /workspace/crates/db/migrations'
+alias sqlx='dbmate --no-dump-schema --migrations-dir /workspace/crates/db/migrations' # TODO
 alias db='psql $DATABASE_URL'

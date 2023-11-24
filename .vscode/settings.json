@@ -1,0 +1,58 @@
+{
+  "psi-header.templates": [
+    {
+      "language": "*",
+      "template": [
+        "File: <<projectname>> - <<filename>>",
+        "Created: <<filecreated('dddd, Do MMMM YYYY h:mm:ss a')>>",
+        "Author: <<author>> (<<authoremail>>)",
+        "-",
+        "Last Modified: <<dateformat('dddd, Do MMMM YYYY h:mm:ss a')>>",
+        "Modified By: <<author>> (<<authoremail>>)",
+        "-",
+        "Copyright <<year>> <<copyrightholder>>, <<company>>"
+      ]
+    }
+  ],
+  "psi-header.config": {
+    "forceToTop": true,
+    "blankLinesAfter": 1,
+    "spacesBetweenYears": false,
+    "company": "<<company>>",
+    "copyrightHolder": "<<copyrightholder>>",
+    "creationDateZero": "asIs"
+  },
+  "psi-header.changes-tracking": {
+    "isActive": true,
+    "modAuthor": "Modified By:",
+    "modDate": "Last Modified:",
+    "include": [
+      "rust"
+    ],
+    "autoHeader": "autoSave",
+    "enforceHeader": true,
+    "replace": [
+      "File:"
+    ],
+    "updateLicenseVariables": false
+  },
+  "editor.tabSize": 4,
+  "editor.defaultFormatter": "rust-lang.rust-analyzer",
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": false,
+  "resmon.show.cpuusage": true,
+  "resmon.show.cpufreq": false,
+  "resmon.show.battery": false,
+  "resmon.updatefrequencyms": 5000,
+  "resmon.show.cputemp": false,
+  "workbench.iconTheme": "material-icon-theme",
+  "[toml]": {
+    "editor.defaultFormatter": "tamasfe.even-better-toml"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "rust-analyzer.linkedProjects": [
+    "./Cargo.toml"
+  ]
+}
