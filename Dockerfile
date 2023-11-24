@@ -27,6 +27,7 @@ RUN apt upgrade
 RUN apt -y install curl
 RUN apt -y install gcc
 RUN apt -y install git
+RUN apt -y install libssl-dev
 RUN apt autoremove -y
 RUN apt clean -y     
 RUN rm -r /var/cache/* /var/lib/apt/lists/*     
@@ -43,8 +44,7 @@ RUN cargo install sqlx-cli --no-default-features --features postgres
 RUN groupadd --gid $USER_GID $USERNAME
 RUN useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME
 RUN chown -R $USERNAME:$USERNAME $WORKSPACE_HOME
-RUN chown -R $USERNAME:$USERNAME $CARGO_HOME
-RUN chown -R $USERNAME:$USERNAME $RUSTUP_HOME
+RUN chmod -R a+w $RUSTUP_HOME $CARGO_HOME;
 USER $USERNAME
 
 # SSH setup
@@ -60,16 +60,3 @@ RUN cp $WORKSPACE_HOME/.devcontainer/.bash_aliases /home/$USERNAME/.bash_aliases
 RUN git config --global --add safe.directory /workspace
 # Enable our git hooks and set the permisisons on docker sock.
 RUN echo 'git config core.hooksPath $WORKSPACE_HOME/.devcontainer/.githooks' >> ~/.bashrc
-
-
-# TODO : Supprimer
-# RUN install -m 0755 -d /etc/apt/keyrings     
-# RUN curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg     
-# RUN chmod a+r /etc/apt/keyrings/docker.gpg     
-# RUN curl -fsSL "https://download.docker.com/linux/debian/gpg" | apt-key add -     
-# RUN echo         "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian         "$(. /etc/os-release 
-# RUN echo "$VERSION_CODENAME")" stable" |         tee /etc/apt/sources.list.d/docker.list > /dev/null     
-# RUN apt-get -y --no-install-recommends install docker-ce docker-ce-cli containerd.io     
-# RUN chmod 0440 /etc/sudoers.d/$USERNAME     
-# RUN curl -L https://github.com/docker/compose/releases/download/v$DOCKER_COMPOSE_VERSION/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose     
-# RUN chmod +x /usr/local/bin/docker-compose     
