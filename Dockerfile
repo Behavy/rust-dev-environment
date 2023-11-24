@@ -15,6 +15,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 ENV PATH=$CARGO_HOME/bin:$PATH
 
+ARG GIT_NAME
+ARG GIT_EMAIL
 ARG SSH_PATH
 
 # Create directories
@@ -58,5 +60,7 @@ RUN cp $WORKSPACE_HOME/.devcontainer/.bashrc /home/$USERNAME/.bashrc
 RUN cp $WORKSPACE_HOME/.devcontainer/.bash_aliases /home/$USERNAME/.bash_aliases
 
 RUN git config --global --add safe.directory /workspace
+RUN git config --global user.name $GIT_NAME
+RUN git config --global user.email $GIT_EMAIL
 # Enable our git hooks and set the permisisons on docker sock.
 RUN echo 'git config core.hooksPath $WORKSPACE_HOME/.devcontainer/.githooks' >> ~/.bashrc
