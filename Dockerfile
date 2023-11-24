@@ -41,6 +41,8 @@ RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain $RUST_VERSI
 RUN cargo install cargo-watch
 RUN cargo install sqlx-cli --no-default-features --features postgres
 
+# SSH setup
+COPY $SSH_PATH /home/$USERNAME/.ssh
 
 # User setup
 RUN groupadd --gid $USER_GID $USERNAME
@@ -48,9 +50,6 @@ RUN useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME
 RUN chown -R $USERNAME:$USERNAME $WORKSPACE_HOME
 RUN chmod -R a+w $RUSTUP_HOME $CARGO_HOME;
 USER $USERNAME
-
-# SSH setup
-COPY $SSH_PATH /home/$USERNAME/.ssh
 
 # Add project files
 COPY . $WORKSPACE_HOME
