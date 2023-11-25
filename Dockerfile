@@ -50,7 +50,7 @@ RUN groupadd --gid $USER_GID $USERNAME
 RUN useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME
 RUN chown -R $USERNAME:$USERNAME $WORKSPACE_HOME 
 RUN chown -R $USERNAME:$USERNAME /home/$USERNAME
-RUN chmod -R a+w $RUSTUP_HOME $CARGO_HOME
+RUN chown -R $USERNAME:$USERNAME $CARGO_HOME
 USER $USERNAME
 
 # Add project files
