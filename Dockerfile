@@ -51,15 +51,6 @@ RUN cargo install sqlx-cli --no-default-features --features postgres
 COPY $SSH_PATH /home/$USERNAME/.ssh
 
 
-# User setup
-RUN groupadd --gid $USER_GID $USERNAME
-RUN useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME
-RUN chown -R $USERNAME:$USERNAME $WORKSPACE_HOME 
-RUN chown -R $USERNAME:$USERNAME /home/$USERNAME
-RUN chown -R $USERNAME:$USERNAME $CARGO_HOME
-USER $USERNAME
-
-
 # Default files from repo
 RUN git clone https://github.com/Behavy/$GIT_REPOSITORY.git /tmp/$GIT_REPOSITORY
 
@@ -70,9 +61,22 @@ RUN rm -rf /tmp/$GIT_REPOSITORY
 
 
 # Add project files
-COPY . $WORKSPACE_HOME
+COPY . /tmp/$WORKSPACE_HOME
+RUN cp -r /tmp/$WORKSPACE_HOME/* $WORKSPACE_HOME
+RUN rm -rf /tmp/$WORKSPACE_HOME
 WORKDIR $WORKSPACE_HOME
 
+
+# User setup
+RUN groupadd --gid $USER_GID $USERNAME
+RUN useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME
+RUN chown -R $USERNAME:$USERNAME $WORKSPACE_HOME 
+RUN chown -R $USERNAME:$USERNAME /home/$USERNAME
+RUN chown -R $USERNAME:$USERNAME $CARGO_HOME
+USER $USERNAME
+
+
+# Git setup
 RUN git config --global --add safe.directory /workspace
 RUN git config --global user.name $GIT_NAME
 RUN git config --global user.email $GIT_EMAIL
