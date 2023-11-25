@@ -1,5 +1,6 @@
 FROM debian:latest
 
+
 # Environment variables
 ENV USERNAME=vscode
 ENV USER_UID=1000
@@ -20,9 +21,9 @@ ARG GIT_NAME=undefined
 ARG GIT_EMAIL=undefined
 ARG SSH_PATH
 
+
 # Create directories
 RUN mkdir -p $WORKSPACE_HOME/target
-RUN mkdir -p $WORKSPACE_HOME/.devcontainer/.githooks
 
 
 # Install dependencies
@@ -38,14 +39,17 @@ RUN apt autoremove -y
 RUN apt clean -y     
 RUN rm -r /var/cache/* /var/lib/apt/lists/*     
 
+
 # Install rust
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain $RUST_VERSION
 
 RUN cargo install cargo-watch
 RUN cargo install sqlx-cli --no-default-features --features postgres
 
+
 # SSH setup
 COPY $SSH_PATH /home/$USERNAME/.ssh
+
 
 # User setup
 RUN groupadd --gid $USER_GID $USERNAME
@@ -55,6 +59,7 @@ RUN chown -R $USERNAME:$USERNAME /home/$USERNAME
 RUN chown -R $USERNAME:$USERNAME $CARGO_HOME
 USER $USERNAME
 
+
 # Default files from repo
 RUN git clone https://github.com/Behavy/$GIT_REPOSITORY.git /tmp/$GIT_REPOSITORY
 
@@ -63,6 +68,7 @@ RUN cp /tmp/$GIT_REPOSITORY/.bash_aliases /home/$USERNAME/.bash_aliases
 RUN cp -r /tmp/$GIT_REPOSITORY/.vscode $WORKSPACE_HOME/.vscode
 RUN rm -rf /tmp/$GIT_REPOSITORY
 
+
 # Add project files
 COPY . $WORKSPACE_HOME
 WORKDIR $WORKSPACE_HOME
@@ -70,6 +76,3 @@ WORKDIR $WORKSPACE_HOME
 RUN git config --global --add safe.directory /workspace
 RUN git config --global user.name $GIT_NAME
 RUN git config --global user.email $GIT_EMAIL
-# Enable our git hooks and set the permisisons on docker sock.
-RUN echo 'git config core.hooksPath $WORKSPACE_HOME/.devcontainer/.githooks' >> ~/.bashrc
-
