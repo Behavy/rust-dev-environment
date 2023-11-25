@@ -23,7 +23,7 @@ ARG SSH_PATH
 
 
 # Create directories
-RUN mkdir -p $WORKSPACE_HOME/target
+RUN mkdir -p $WORKSPACE_HOME/target $WORKSPACE_HOME/.vscode
 
 
 # Install dependencies
