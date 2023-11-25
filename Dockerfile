@@ -51,6 +51,11 @@ RUN cargo install sqlx-cli --no-default-features --features postgres
 COPY $SSH_PATH /home/$USERNAME/.ssh
 
 
+# Add project files
+COPY . $WORKSPACE_HOME
+WORKDIR $WORKSPACE_HOME
+
+
 # Default files from repo
 RUN git clone https://github.com/Behavy/$GIT_REPOSITORY.git /tmp/$GIT_REPOSITORY
 
@@ -59,12 +64,7 @@ RUN cp /tmp/$GIT_REPOSITORY/default/.bash_aliases /home/$USERNAME/.bash_aliases
 RUN cp /tmp/$GIT_REPOSITORY/default/settings.json $WORKSPACE_HOME/.vscode/settings.json
 RUN rm -rf /tmp/$GIT_REPOSITORY
 
-
-# Add project files
-COPY . /tmp/$WORKSPACE_HOME
-RUN cp -r /tmp/$WORKSPACE_HOME/* $WORKSPACE_HOME
-RUN rm -rf /tmp/$WORKSPACE_HOME
-WORKDIR $WORKSPACE_HOME
+COPY .vscode/* $WORKSPACE_HOME/.vscode/
 
 
 # User setup
