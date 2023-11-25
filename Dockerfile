@@ -51,14 +51,6 @@ COPY . $WORKSPACE_HOME
 WORKDIR $WORKSPACE_HOME
 
 
-# Default files from repo
-RUN git clone https://github.com/Behavy/$GIT_REPOSITORY.git /tmp/$GIT_REPOSITORY
-
-RUN cp /tmp/$GIT_REPOSITORY/default/.bashrc /home/$USERNAME/.bashrc
-RUN cp /tmp/$GIT_REPOSITORY/default/.bash_aliases /home/$USERNAME/.bash_aliases
-RUN rm -rf /tmp/$GIT_REPOSITORY
-
-
 # User setup
 RUN groupadd --gid $USER_GID $USERNAME
 RUN useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME
@@ -66,6 +58,14 @@ RUN chown -R $USERNAME:$USERNAME $WORKSPACE_HOME
 RUN chown -R $USERNAME:$USERNAME /home/$USERNAME
 RUN chown -R $USERNAME:$USERNAME $CARGO_HOME
 USER $USERNAME
+
+
+# Default files from repo
+RUN git clone https://github.com/Behavy/$GIT_REPOSITORY.git /tmp/$GIT_REPOSITORY
+
+RUN cp /tmp/$GIT_REPOSITORY/default/.bashrc /home/$USERNAME/.bashrc
+RUN cp /tmp/$GIT_REPOSITORY/default/.bash_aliases /home/$USERNAME/.bash_aliases
+RUN rm -rf /tmp/$GIT_REPOSITORY
 
 
 # Git setup
