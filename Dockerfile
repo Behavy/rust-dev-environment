@@ -65,7 +65,7 @@ RUN git config --global user.email $GIT_EMAIL
 RUN echo 'git config core.hooksPath $WORKSPACE_HOME/.devcontainer/.githooks' >> ~/.bashrc
 
 # Default files from repo
-RUN git clone git@github.com:Behavy/$GIT_REPOSITORY.git /tmp/$GIT_REPOSITORY
+RUN git clone https://github.com/Behavy/$GIT_REPOSITORY.git /tmp/$GIT_REPOSITORY
 
 RUN cp /tmp/$GIT_REPOSITORY/.bashrc /home/$USERNAME/.bashrc
 RUN cp /tmp/$GIT_REPOSITORY/.bash_aliases /home/$USERNAME/.bash_aliases
