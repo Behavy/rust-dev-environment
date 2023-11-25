@@ -19,7 +19,6 @@ ENV PATH=$CARGO_HOME/bin:$PATH
 ENV GIT_REPOSITORY=rust-dev-environment
 ARG GIT_NAME=undefined
 ARG GIT_EMAIL=undefined
-ARG SSH_PATH
 
 
 # Create directories
@@ -45,10 +44,6 @@ RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain $RUST_VERSI
 
 RUN cargo install cargo-watch
 RUN cargo install sqlx-cli --no-default-features --features postgres
-
-
-# SSH setup
-COPY $SSH_PATH /home/$USERNAME/.ssh
 
 
 # Add project files
