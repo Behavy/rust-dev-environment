@@ -6,11 +6,12 @@ services:
     image: quentinlcs/rust-dev-environment
     volumes:
       - ..:/workspace:cached
-      - ~/.ssh:/usr/vscode/.ssh:cached # Give access to ssh keys on the host
+      - ~/.ssh:/home/vscode/.ssh:cached # Give access to ssh keys on the host
       - /var/run/docker.sock:/var/run/docker.sock # We need this so docker in docker works
       - target:/workspace/target # Set target as a volume for performance. 
     environment:
-      - SSH_PATH=/Users/quentin/.ssh
+      - GIT_NAME=default
+      - GIT_EMAIL=default@gmail.com
     # depends_on:
     #   - database
     command: sleep infinity # Overrides default command so things don't shut down after the process ends.
