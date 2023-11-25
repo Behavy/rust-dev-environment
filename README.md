@@ -1,6 +1,12 @@
 # rust-dev-environment
 
-## A - Steps
+## A - How to use this environment
+
+1. Copy the "to-copy" folders into your repository
+2. Install the recommended vscode extensions ( `ms-vscode-remote.remote-containers` )
+3. Run the vscode in container by clicking in the bottom left corner and `open in the container`.
+
+## B - Building steps
 
 ### 1. Build and run the docker images
 
@@ -21,3 +27,4 @@ docker exec -it devcontainer-development-1 bash;
 ``` sh
 exit
 ```
+
