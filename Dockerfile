@@ -63,9 +63,9 @@ USER $USERNAME
 # Default files from repo
 RUN git clone https://github.com/Behavy/$GIT_REPOSITORY.git /tmp/$GIT_REPOSITORY
 
-RUN cp /tmp/$GIT_REPOSITORY/.bashrc /home/$USERNAME/.bashrc
-RUN cp /tmp/$GIT_REPOSITORY/.bash_aliases /home/$USERNAME/.bash_aliases
-RUN cp -r /tmp/$GIT_REPOSITORY/.vscode $WORKSPACE_HOME/.vscode
+RUN cp /tmp/$GIT_REPOSITORY/default/.bashrc /home/$USERNAME/.bashrc
+RUN cp /tmp/$GIT_REPOSITORY/default/.bash_aliases /home/$USERNAME/.bash_aliases
+RUN cp /tmp/$GIT_REPOSITORY/default/settings.json $WORKSPACE_HOME/.vscode/settings.json
 RUN rm -rf /tmp/$GIT_REPOSITORY
 
 
