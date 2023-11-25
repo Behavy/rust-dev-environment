@@ -16,6 +16,9 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 ENV PATH=$CARGO_HOME/bin:$PATH
 
+ENV LANGUAGE=en_US.UTF-8
+ENV LC_ALL=$LANGUAGE
+
 ENV GIT_REPOSITORY=rust-dev-environment
 ARG GIT_NAME=undefined
 ARG GIT_EMAIL=undefined
