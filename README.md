@@ -28,4 +28,3 @@ docker exec -it devcontainer-development-1 bash;
 ``` sh
 exit
 ```
-
