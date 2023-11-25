@@ -15,6 +15,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 ENV PATH=$CARGO_HOME/bin:$PATH
 
+ENV GIT_REPOSITORY=rust-dev-environment
 ARG GIT_NAME=undefined
 ARG GIT_EMAIL=undefined
 ARG SSH_PATH
@@ -36,8 +37,7 @@ RUN apt autoremove -y
 RUN apt clean -y     
 RUN rm -r /var/cache/* /var/lib/apt/lists/*     
 
-
-# -- Rust
+# Install rust
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain $RUST_VERSION
 
 RUN cargo install cargo-watch
@@ -58,11 +58,17 @@ USER $USERNAME
 COPY . $WORKSPACE_HOME
 WORKDIR $WORKSPACE_HOME
 
-RUN cp $WORKSPACE_HOME/.devcontainer/.bashrc /home/$USERNAME/.bashrc
-RUN cp $WORKSPACE_HOME/.devcontainer/.bash_aliases /home/$USERNAME/.bash_aliases
-
 RUN git config --global --add safe.directory /workspace
 RUN git config --global user.name $GIT_NAME
 RUN git config --global user.email $GIT_EMAIL
 # Enable our git hooks and set the permisisons on docker sock.
 RUN echo 'git config core.hooksPath $WORKSPACE_HOME/.devcontainer/.githooks' >> ~/.bashrc
+
+# Default files from repo
+RUN git clone git@github.com:Behavy/$GIT_REPOSITORY.git /tmp/$GIT_REPOSITORY
+
+RUN cp /tmp/$GIT_REPOSITORY/.bashrc /home/$USERNAME/.bashrc
+RUN cp /tmp/$GIT_REPOSITORY/.bash_aliases /home/$USERNAME/.bash_aliases
+RUN cp /tmp/$GIT_REPOSITORY/.vscode $WORKSPACE_HOME/.vscode
+RUN cp /tmp/$GIT_REPOSITORY/devcontainer.json $WORKSPACE_HOME/.devcontainer/devcontainer.json
+RUN rm -rf /tmp/$GIT_REPOSITORY
