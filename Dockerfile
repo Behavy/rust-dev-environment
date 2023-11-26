@@ -44,6 +44,7 @@ RUN rm -r /var/cache/* /var/lib/apt/lists/*
 
 # Set locale
 RUN locale-gen $LANGUAGE
+RUN dpkg-reconfigure locales
 
 # Install rust
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain $RUST_VERSION
