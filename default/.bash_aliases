@@ -24,14 +24,7 @@ wt() {
 
 we() {
   
-  if [ -z "$1" ]; then
-    echo "Please provide the name of the example you want to run"
-    echo "Available examples are:\n"
-    ls /workspace/crates/api/examples | sed 's/\.rs//'
-    return 1
-  fi
-
-  if [ ! -f "/workspace/crates/api/examples/$1.rs" ]; then
+  if [ -z "$1" ] || [ ! -f "/workspace/crates/api/examples/$1.rs" ]; then
     echo "Please provide the name of the example you want to run"
     echo "Available examples are:\n"
     ls /workspace/crates/api/examples | sed 's/\.rs//'
