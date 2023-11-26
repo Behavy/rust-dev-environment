@@ -16,7 +16,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 ENV PATH=$CARGO_HOME/bin:$PATH
 
-ENV LC_ALL=en_US.UTF-8
+ENV LANGUAGE=en_US.UTF-8
 
 ENV GIT_REPOSITORY=rust-dev-environment
 ARG GIT_NAME=undefined
@@ -30,6 +30,7 @@ RUN mkdir -p $WORKSPACE_HOME/target
 # Install dependencies
 RUN apt update 
 RUN apt upgrade
+RUN apt -y install locales
 RUN apt -y install curl
 RUN apt -y install gcc
 RUN apt -y install git
@@ -40,6 +41,8 @@ RUN apt autoremove -y
 RUN apt clean -y     
 RUN rm -r /var/cache/* /var/lib/apt/lists/*     
 
+# Set locale
+RUN locale-gen $LANGUAGE
 
 # Install rust
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain $RUST_VERSION
