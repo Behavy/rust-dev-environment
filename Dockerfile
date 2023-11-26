@@ -43,7 +43,7 @@ RUN apt clean -y
 RUN rm -r /var/cache/* /var/lib/apt/lists/*     
 
 # Set locale
-RUN echo $LANGUAGE >> /etc/locale.gen
+RUN echo $LANGUAGE >> /etc/locale.gen UTF-8
 RUN locale-gen
 RUN dpkg-reconfigure locales
 
