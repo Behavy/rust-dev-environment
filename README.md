@@ -1,6 +1,6 @@
 # rust-dev-environment
 
-## A - How to use this environment
+## A - How to setup this environment
 
 1. Copy the `to-copy` inside folders into your repository,
 2. Set the environment variables in the `docker-compose.yml`,
