@@ -7,7 +7,49 @@
 3. Install the recommended vscode extensions ( `ms-vscode-remote.remote-containers` ),
 4. Run the vscode in container by clicking in the bottom left corner and `open in the container`.
 
-## B - Building steps
+## B - Installed packages
+
+| name | version |
+|---|---|
+| curl | latest |
+| git | latest |
+| postgres-client | latest |
+
+## C - Custom commands
+
+### 1. Global
+
+| command | description |
+|---|---|
+| `c` | clear |
+
+### 2. Git
+
+| command | description |
+|---|---|
+| `gst` | git status |
+| `gcm` | git checkout main |
+| `gp` | git push |
+| `gcam` | git commit -a -m |
+| `gcb` | git checkout -b |
+| `gcr <branch>` | git checkout the given branch |
+
+### 3. Cargo
+
+| command | description |
+|---|---|
+| `ws` | watch the server |
+| `wt (test)` | Run the given test or all of them if none is given |
+| `we (example)` | Run the given example |
+
+### 4. Database
+
+| command | description |
+|---|---|
+| `migrate` | todo : sqlx ci migration |
+| `db` | Connect to the postgres db |
+
+## D - Building steps
 
 ### 1. Build and run the docker images
 
