@@ -43,7 +43,8 @@ RUN apt clean -y
 RUN rm -r /var/cache/* /var/lib/apt/lists/*     
 
 # Set locale
-RUN locale-gen $LANGUAGE
+RUN echo $LANGUAGE >> /etc/locale.gen
+RUN locale-gen
 RUN dpkg-reconfigure locales
 
 # Install rust
