@@ -14,6 +14,9 @@
 | curl | latest |
 | git | latest |
 | postgres-client | latest |
+| rustup | latest |
+| cargo | latest |
+| sqlx-cli | latest |
 
 ## C - Custom commands
 
