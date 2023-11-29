@@ -50,6 +50,8 @@ RUN dpkg-reconfigure locales
 # Install rust
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain $RUST_VERSION
 
+RUN rustup component add rust-src
+
 RUN cargo install cargo-watch
 RUN cargo install sqlx-cli --no-default-features --features postgres
 
