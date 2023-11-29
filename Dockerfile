@@ -8,7 +8,7 @@ ENV USER_GID=1000
 
 ENV RUSTUP_HOME=/usr/local/.rustup
 ENV CARGO_HOME=/usr/local/.cargo
-ENV RUST_VERSION=1.73.0
+ENV RUST_VERSION=1.74.0
 
 ENV WORKSPACE_HOME=/workspace
 
