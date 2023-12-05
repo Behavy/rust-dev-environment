@@ -31,7 +31,7 @@ we() {
     return 1
   fi
 
-  cargo watch --quiet --clear --watch /workspace/crates/api/examples/$1.rs --watch /workspace/crates/api/src/ --watch /workspace/.cargo/ --watch /workspace/crates/api/src --watch /workspace/crates/log/src --watch /workspace/sql --delay 8 --exec "run --example $1"
+  cargo watch --quiet --clear --watch /workspace/crates/api/examples/$1.rs --watch /workspace/crates/api/src/ --watch /workspace/.cargo/ --watch /workspace/crates/api/src --watch /workspace/crates/log/src --watch /workspace/sql --delay 10 --exec "run --example $1"
 }
 
 
