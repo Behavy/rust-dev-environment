@@ -11,13 +11,13 @@ alias gcr='f() { git checkout -b $1 origin/$1; }; f'
 
 
 # Cargo watch
-alias ws='cargo watch -q -c -w /workspace/crates/api/src/ -w /workspace/.cargo/ -w /workspace/crates/api/src -w /workspace/crates/log/src -w /workspace/sql -x run'
+alias ws='cargo watch --quiet --clear --watch /workspace/crates/api/src/ --watch /workspace/.cargo/ --watch /workspace/crates/api/src --watch /workspace/crates/log/src --watch /workspace/sql --exec run'
 
 wt() {
   if [ -z "$1" ]; then
-    cargo watch -q -c -w /workspace/crates/api/src/ -w /workspace/crates/api/tests/ -x "test -- --nocapture"
+    cargo watch --quiet --clear --watch /workspace/crates/api/src/ --watch /workspace/crates/api/tests/ --exec "test -- --nocapture"
   else
-    cargo watch -q -c -w /workspace/crates/api/src/ -w /workspace/crates/api/tests/ -x "test $1 -- --nocapture"
+    cargo watch --quiet --clear --watch /workspace/crates/api/src/ --watch /workspace/crates/api/tests/ --exec "test $1 -- --nocapture"
   fi
 
 }
@@ -31,7 +31,7 @@ we() {
     return 1
   fi
 
-  cargo watch -q -c -w /workspace/crates/api/examples/$1.rs -w /workspace/crates/api/src/ -w /workspace/.cargo/ -w /workspace/crates/api/src -w /workspace/crates/log/src -w /workspace/sql -x "sleep 2; run --example $1"
+  cargo watch --quiet --clear --watch /workspace/crates/api/examples/$1.rs --watch /workspace/crates/api/src/ --watch /workspace/.cargo/ --watch /workspace/crates/api/src --watch /workspace/crates/log/src --watch /workspace/sql --delay 2 --exec "run --example $1"
 }
 
 
