@@ -23,6 +23,8 @@ wt() {
 }
 
 we() {
+
+  delay_seconds=10
   
   if [ -z "$1" ] || [ ! -f "/workspace/crates/api/examples/$1.rs" ]; then
     echo "Please provide the name of the example you want to run"
@@ -31,7 +33,11 @@ we() {
     return 1
   fi
 
-  cargo watch --quiet --clear --watch /workspace/crates/api/examples/$1.rs --watch /workspace/crates/api/src/ --watch /workspace/.cargo/ --watch /workspace/crates/api/src --watch /workspace/crates/log/src --watch /workspace/sql --delay 10 --exec "run --example $1"
+  if [ ! -z "$2" ]; then
+    delay_seconds=$2
+  fi
+
+  cargo watch --quiet --clear --watch /workspace/crates/api/examples/$1.rs --watch /workspace/crates/api/src/ --watch /workspace/.cargo/ --watch /workspace/crates/api/src --watch /workspace/crates/log/src --watch /workspace/sql --delay $delay_seconds --exec "run --example $1"
 }
 
 
