@@ -21,7 +21,7 @@ build_watch_command() {
       fi
       watch_command="$watch_command --watch $towatch"
     done
-  else; then
+  else
     watch_command="--watch /workspace/crates"
   fi
 
