@@ -13,15 +13,15 @@ alias gcr='f() { git checkout -b $1 origin/$1; }; f'
 build_watch_command() {
   watch_command=""
 
-  if [ ! -z ${$1} ]; then
-    for towatch in ${${$1}[@]}; do
+  if [ ! -z ${!1} ]; then
+    for towatch in ${!1[@]}; do
       if [ ! -d "$towatch" ]; then
         echo "The directory $towatch does not exist"
         return 1
       fi
       watch_command="$watch_command --watch $towatch"
     done
-  else 
+  else; then
     watch_command="--watch /workspace/crates"
   fi
 
@@ -30,13 +30,13 @@ build_watch_command() {
 
 # Cargo watch
 ws() {
-  watch_command=build_watch_command "$ws_to_watch"
+  watch_command=build_watch_command "ws_to_watch"
 
   cargo watch --quiet --clear $watch_command --exec "run services/api"
 }
 
 wt() {
-  watch_command=build_watch_command "$wt_to_watch"
+  watch_command=build_watch_command "wt_to_watch"
 
   if [ -z "$1" ]; then
     cargo watch --quiet --clear $watch_command --exec "test -- --nocapture"
@@ -47,7 +47,7 @@ wt() {
 }
 
 we() {
-  watch_command=build_watch_command "$ws_to_watch"
+  watch_command=build_watch_command "we_to_watch"
 
   delay_seconds=10
   
@@ -62,7 +62,7 @@ we() {
     delay_seconds=$2
   fi
 
-  cargo watch --quiet --clear --watch $we_folder/$1.rs $watch_command --delay $delay_seconds --exec "run --example $1"
+  cargo watch --quiet --clear --watch /workspace/crates/services/api/examples/$1.rs $watch_command --delay $delay_seconds --exec "run --example $1"
 }
 
 
