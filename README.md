@@ -52,7 +52,13 @@
 | `migrate` | todo : sqlx ci migration |
 | `db` | Connect to the postgres db |
 
-## D - Building steps
+## D - Create custom aliases
+
+You can add your own aliases by writing them in a `.bash_aliases` file in the `.devcontainer` folder.
+
+It's that simple. :)
+
+## E - Building steps
 
 ### 1. Build and run the docker images
 
