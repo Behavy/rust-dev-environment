@@ -77,7 +77,7 @@ RUN cp /tmp/$GIT_REPOSITORY/default/.bashrc /home/$USERNAME/.bashrc
 RUN cp /tmp/$GIT_REPOSITORY/default/.bash_aliases_base /home/$USERNAME/.bash_aliases_base
 RUN rm -rf /tmp/$GIT_REPOSITORY
 
-RUN if [[ -f $WORKSPACE_HOME/.devcontainer/.bash_aliases ]] ; then cp $WORKSPACE_HOME/.devcontainer/.bash_aliases /home/$USERNAME/.bash_aliases ; fi ;
+RUN if [ -f $WORKSPACE_HOME/.devcontainer/.bash_aliases ] ; then cp $WORKSPACE_HOME/.devcontainer/.bash_aliases /home/$USERNAME/.bash_aliases ; fi ;
 
 # Git setup
 RUN git config --global --add safe.directory /workspace
