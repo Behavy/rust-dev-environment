@@ -11,7 +11,7 @@ alias gcr='f() { git checkout -b $1 origin/$1; }; f'
 
 
 # Cargo watch
-alias ws='cargo watch --quiet --clear --watch /workspace/crates/services/api/src/ --watch /workspace/.cargo/ --watch /workspace/crates/libs --watch /workspace/sql --exec run api'
+alias ws='cargo watch --quiet --clear --watch /workspace/crates/services/api/src/ --watch /workspace/.cargo/ --watch /workspace/crates/libs --watch /workspace/sql --exec run services/api'
 
 wt() {
   if [ -z "$1" ]; then
