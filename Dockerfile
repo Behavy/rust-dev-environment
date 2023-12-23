@@ -74,9 +74,10 @@ USER $USERNAME
 RUN git clone https://github.com/Behavy/$GIT_REPOSITORY.git /tmp/$GIT_REPOSITORY
 
 RUN cp /tmp/$GIT_REPOSITORY/default/.bashrc /home/$USERNAME/.bashrc
-RUN cp /tmp/$GIT_REPOSITORY/default/.bash_aliases /home/$USERNAME/.bash_aliases
+RUN cp /tmp/$GIT_REPOSITORY/default/.bash_aliases_base /home/$USERNAME/.bash_aliases_base
 RUN rm -rf /tmp/$GIT_REPOSITORY
 
+RUN cp $WORKSPACE_HOME/.devcontainer/.bash_aliases /home/$USERNAME/.bash_aliases
 
 # Git setup
 RUN git config --global --add safe.directory /workspace
