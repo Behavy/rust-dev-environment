@@ -10,34 +10,35 @@ alias gcb='git checkout -b'
 alias gcr='f() { git checkout -b $1 origin/$1; }; f'
 
 
-build_watch_command() {
-  eval "to_watch_list=\$$1"
-  watch_command=""
+testcmd() {
+  eval to_watch_list=\${$1[*]}
+  echo "to_watch_list: ${to_watch_list[*]}"
+  result=""
 
-  if [ ! -z $to_watch_list ]; then
-    for towatch in ${to_watch_list[@]}; do
-      if [ ! -d "$towatch" ]; then
-        echo "The directory $towatch does not exist"
-        return 1
-      fi
-      watch_command="$watch_command --watch $towatch"
-    done
-  else
-    watch_command="--watch /workspace/crates"
-  fi
+  echo "to_watch_list is not empty"
+  for towatch in ${to_watch_list[@]}; do
+    if [ ! -d "$towatch" ]; then
+      echo "The directory $towatch does not exist"
+      return 1
+    fi
+    echo "File: $towatch"
+    result="$result --watch $towatch"
+  done
 
-  return $watch_command
+  return 0
 }
 
 # Cargo watch
 ws() {
-  watch_command=build_watch_command "ws_to_watch"
+  result=""
+  watch_command=build_watch_command $ws_to_watch $result
 
   cargo watch --quiet --clear $watch_command --exec "run services/api"
 }
 
 wt() {
-  watch_command=build_watch_command "wt_to_watch"
+  result=""
+  watch_command=build_watch_command $wt_to_watch $result
 
   if [ -z "$1" ]; then
     cargo watch --quiet --clear $watch_command --exec "test -- --nocapture"
@@ -48,7 +49,8 @@ wt() {
 }
 
 we() {
-  watch_command=build_watch_command "we_to_watch"
+  result=""
+  watch_command=build_watch_command $ws_to_watch $result
 
   delay_seconds=10
   
