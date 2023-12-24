@@ -1,6 +1,5 @@
 FROM debian:latest
 
-
 # Environment variables
 ENV USERNAME=vscode
 ENV USER_UID=1000
@@ -18,10 +17,6 @@ ENV PATH=$CARGO_HOME/bin:$PATH
 
 ENV LANGUAGE=en_US.UTF-8
 ENV LC_ALL=$LANGUAGE
-
-ENV GIT_REPOSITORY=rust-dev-environment
-ARG GIT_NAME=undefined
-ARG GIT_EMAIL=undefined
 
 
 # Create directories
@@ -42,10 +37,12 @@ RUN apt autoremove -y
 RUN apt clean -y     
 RUN rm -r /var/cache/* /var/lib/apt/lists/*     
 
+
 # Set locale
 RUN echo $LANGUAGE >> /etc/locale.gen UTF-8
 RUN locale-gen
 RUN dpkg-reconfigure locales
+
 
 # Install rust
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain $RUST_VERSION
@@ -57,9 +54,10 @@ RUN cargo install sqlx-cli --no-default-features --features postgres
 
 
 # Add project files
-COPY . $WORKSPACE_HOME
-COPY .devcontainer/.bash_aliases /home/$USERNAME/.bash_aliases
-WORKDIR $WORKSPACE_HOME
+COPY . /tmp/environment
+RUN cp /tmp/environment/default/.bashrc /home/$USERNAME/.bashrc
+RUN cp /tmp/environment/default/.bash_aliases_base /home/$USERNAME/.bash_aliases_base
+RUN rm -rf /tmp/environment
 
 
 # User setup
@@ -71,14 +69,10 @@ RUN chown -R $USERNAME:$USERNAME $CARGO_HOME
 USER $USERNAME
 
 
-# Default files from repo
-RUN git clone https://github.com/Behavy/$GIT_REPOSITORY.git /tmp/$GIT_REPOSITORY
-
-RUN cp /tmp/$GIT_REPOSITORY/default/.bashrc /home/$USERNAME/.bashrc
-RUN cp /tmp/$GIT_REPOSITORY/default/.bash_aliases_base /home/$USERNAME/.bash_aliases_base
-RUN rm -rf /tmp/$GIT_REPOSITORY
-
 # Git setup
 RUN git config --global --add safe.directory /workspace
 RUN git config --global user.name $GIT_NAME
 RUN git config --global user.email $GIT_EMAIL
+
+
+WORKDIR $WORKSPACE_HOME
