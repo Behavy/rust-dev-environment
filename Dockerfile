@@ -58,6 +58,7 @@ RUN cargo install sqlx-cli --no-default-features --features postgres
 
 # Add project files
 COPY . $WORKSPACE_HOME
+COPY .devcontainer/.bash_aliases /home/$USERNAME/.bash_aliases
 WORKDIR $WORKSPACE_HOME
 
 
@@ -76,8 +77,6 @@ RUN git clone https://github.com/Behavy/$GIT_REPOSITORY.git /tmp/$GIT_REPOSITORY
 RUN cp /tmp/$GIT_REPOSITORY/default/.bashrc /home/$USERNAME/.bashrc
 RUN cp /tmp/$GIT_REPOSITORY/default/.bash_aliases_base /home/$USERNAME/.bash_aliases_base
 RUN rm -rf /tmp/$GIT_REPOSITORY
-
-COPY .devcontainer/.bash_aliases /home/$USERNAME/.bash_aliases
 
 # Git setup
 RUN git config --global --add safe.directory /workspace
