@@ -66,7 +66,7 @@ USER $USERNAME
 COPY . /tmp/environment
 RUN ls -la /tmp/environment
 RUN cp /tmp/environment/default/.bashrc /home/$USERNAME/.bashrc
-RUN cp /tmp/environment/default/.bash_aliases_base /home/$USERNAME/.bash_aliases_base
+RUN cp /tmp/environment/default/.bash_aliases /home/$USERNAME/.bash_aliases
 RUN rm -rf /tmp/environment
 
 
