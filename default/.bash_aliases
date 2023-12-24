@@ -31,14 +31,14 @@ build_watch_command() {
 # Cargo watch
 ws() {
   result=""
-  watch_command=build_watch_command ws_to_watch $result
+  watch_command=build_watch_command "ws_to_watch" $result
 
   cargo watch --quiet --clear $watch_command --exec "run --bin $ws_bin_name"
 }
 
 wt() {
   result=""
-  watch_command=build_watch_command wt_to_watch $result
+  watch_command=build_watch_command "wt_to_watch" $result
 
   if [ -z "$1" ]; then
     cargo watch --quiet --clear $watch_command --exec "test -- --nocapture"
@@ -50,7 +50,7 @@ wt() {
 
 we() {
   result=""
-  watch_command=build_watch_command ws_to_watch $result
+  watch_command=build_watch_command "ws_to_watch" $result
 
   delay_seconds=10
   
