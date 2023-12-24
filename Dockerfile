@@ -63,7 +63,6 @@ RUN chown -R $USERNAME:$USERNAME $CARGO_HOME
 
 # Add project files
 COPY . /tmp/environment
-RUN ls -la /tmp/environment
 RUN cp /tmp/environment/default/.bashrc /home/$USERNAME/.bashrc
 RUN cp /tmp/environment/default/.bash_aliases /home/$USERNAME/.bash_aliases
 RUN rm -rf /tmp/environment
