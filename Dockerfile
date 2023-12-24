@@ -77,6 +77,7 @@ RUN cp /tmp/$GIT_REPOSITORY/default/.bashrc /home/$USERNAME/.bashrc
 RUN cp /tmp/$GIT_REPOSITORY/default/.bash_aliases_base /home/$USERNAME/.bash_aliases_base
 RUN rm -rf /tmp/$GIT_REPOSITORY
 
+RUN mkdir -p $WORKSPACE_HOME/.devcontainer
 RUN cp $WORKSPACE_HOME/.devcontainer/.bash_aliases* /home/$USERNAME
 
 # Git setup
