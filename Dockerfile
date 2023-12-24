@@ -69,12 +69,6 @@ RUN cp /tmp/environment/default/.bash_aliases /home/$USERNAME/.bash_aliases
 RUN rm -rf /tmp/environment
 
 
-# Git setup
-RUN git config --global --add safe.directory /workspace
-RUN git config --global user.name $GIT_NAME
-RUN git config --global user.email $GIT_EMAIL
-
-
 # Switch to user
 USER $USERNAME
 
