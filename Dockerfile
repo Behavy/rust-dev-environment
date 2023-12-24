@@ -55,6 +55,7 @@ RUN cargo install sqlx-cli --no-default-features --features postgres
 
 # Add project files
 COPY . /tmp/environment
+RUN ls -la /tmp/environment
 RUN cp /tmp/environment/default/.bashrc /home/$USERNAME/.bashrc
 RUN cp /tmp/environment/default/.bash_aliases_base /home/$USERNAME/.bash_aliases_base
 RUN rm -rf /tmp/environment
