@@ -31,26 +31,26 @@ build_watch_command() {
 # Cargo watch
 ws() {
   result=""
-  watch_command=build_watch_command "ws_to_watch" $result
+  build_watch_command ws_to_watch $result
 
-  cargo watch --quiet --clear $watch_command --exec "run --bin $ws_bin_name"
+  cargo watch --quiet --clear $result --exec "run --bin $ws_bin_name"
 }
 
 wt() {
   result=""
-  watch_command=build_watch_command "wt_to_watch" $result
+  build_watch_command wt_to_watch $result
 
   if [ -z "$1" ]; then
-    cargo watch --quiet --clear $watch_command --exec "test -- --nocapture"
+    cargo watch --quiet --clear $result --exec "test -- --nocapture"
   else
-    cargo watch --quiet --clear $watch_command --exec "test $1 -- --nocapture"
+    cargo watch --quiet --clear $result --exec "test $1 -- --nocapture"
   fi
 
 }
 
 we() {
   result=""
-  watch_command=build_watch_command "ws_to_watch" $result
+  build_watch_command ws_to_watch $result
 
   delay_seconds=10
   
@@ -65,7 +65,7 @@ we() {
     delay_seconds=$2
   fi
 
-  cargo watch --quiet --clear --watch /workspace/crates/services/api/examples/$1.rs $watch_command --delay $delay_seconds --exec "run --example $1"
+  cargo watch --quiet --clear --watch /workspace/crates/services/api/examples/$1.rs $result --delay $delay_seconds --exec "run --example $1"
 }
 
 
