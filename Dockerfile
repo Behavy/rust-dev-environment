@@ -18,6 +18,9 @@ ENV PATH=$CARGO_HOME/bin:$PATH
 ENV LANGUAGE=en_US.UTF-8
 ENV LC_ALL=$LANGUAGE
 
+ARG GIT_NAME=undefined
+ARG GIT_EMAIL=undefined
+
 
 # Create directories
 RUN mkdir -p $WORKSPACE_HOME/target 
@@ -66,6 +69,13 @@ COPY . /tmp/environment
 RUN cp /tmp/environment/default/.bashrc /home/$USERNAME/.bashrc
 RUN cp /tmp/environment/default/.bash_aliases /home/$USERNAME/.bash_aliases
 RUN rm -rf /tmp/environment
+
+
+# Git setup
+RUN git config --global --add safe.directory /workspace
+RUN git config --global user.name $GIT_NAME
+RUN git config --global user.email $GIT_EMAIL
+
 
 
 # Switch to user
