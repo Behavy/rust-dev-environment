@@ -10,7 +10,7 @@ alias gcb='git checkout -b'
 alias gcr='f() { git checkout -b $1 origin/$1; }; f'
 
 
-testcmd() {
+build_watch_command() {
   eval to_watch_list=\${$1[*]}
   echo "to_watch_list: ${to_watch_list[*]}"
   result=""
