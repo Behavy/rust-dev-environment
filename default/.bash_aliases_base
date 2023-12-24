@@ -11,10 +11,11 @@ alias gcr='f() { git checkout -b $1 origin/$1; }; f'
 
 
 build_watch_command() {
+  eval "to_watch_list=\$$1"
   watch_command=""
 
-  if [ ! -z ${(P)1} ]; then
-    for towatch in ${(P)1[@]}; do
+  if [ ! -z $to_watch_list ]; then
+    for towatch in ${to_watch_list[@]}; do
       if [ ! -d "$towatch" ]; then
         echo "The directory $towatch does not exist"
         return 1
