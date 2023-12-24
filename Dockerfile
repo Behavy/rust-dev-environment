@@ -59,7 +59,6 @@ RUN useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME
 RUN chown -R $USERNAME:$USERNAME $WORKSPACE_HOME 
 RUN chown -R $USERNAME:$USERNAME /home/$USERNAME
 RUN chown -R $USERNAME:$USERNAME $CARGO_HOME
-USER $USERNAME
 
 
 # Add project files
@@ -76,4 +75,9 @@ RUN git config --global user.name $GIT_NAME
 RUN git config --global user.email $GIT_EMAIL
 
 
+# Switch to user
+USER $USERNAME
+
+
+# Set workdir
 WORKDIR $WORKSPACE_HOME
