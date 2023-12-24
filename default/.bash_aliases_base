@@ -13,8 +13,8 @@ alias gcr='f() { git checkout -b $1 origin/$1; }; f'
 build_watch_command() {
   watch_command=""
 
-  if [ ! -z ${!1} ]; then
-    for towatch in ${!1[@]}; do
+  if [ ! -z ${(P)1} ]; then
+    for towatch in ${(P)1[@]}; do
       if [ ! -d "$towatch" ]; then
         echo "The directory $towatch does not exist"
         return 1
