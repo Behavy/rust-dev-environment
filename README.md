@@ -54,13 +54,22 @@ Et voilà 🪄✨
 | `migrate` | todo : sqlx ci migration |
 | `db` | Connect to the postgres db |
 
-## D - Create custom aliases
+## D - Customize the default commands
+
+| variable | description |
+|---|---|
+| `ws_bin_name` | The executed binary using `ws` command |
+| `ws_to_watch` | The watched files using `ws` command |
+| `wt_to_watch` | The watched files using `wt` command |
+| `we_folder` | The example folder's path used by the `we` command |
+
+## E - Create custom aliases
 
 You can add your own aliases by writing them in a `.bash_aliases` file in the `.devcontainer` folder.
 
 It's that simple. :)
 
-## E - Building steps
+## F - Building steps
 
 ### 1. Build and run the docker images
 
