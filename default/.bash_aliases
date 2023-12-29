@@ -12,16 +12,14 @@ alias gcr='f() { git checkout -b $1 origin/$1; }; f'
 
 build_watch_command() {
   eval to_watch_list=\${$1[*]}
-  echo "to_watch_list: ${to_watch_list[*]}"
   result=""
 
-  echo "to_watch_list is not empty"
   for towatch in ${to_watch_list[@]}; do
     if [ ! -d "$towatch" ]; then
-      echo "The directory $towatch does not exist"
+      >&2 echo "ERROR: The directory $towatch does not exist"
       return 1
     fi
-    echo "File: $towatch"
+    echo "Watching file: $towatch"
     result="$result --watch $towatch"
   done
 
