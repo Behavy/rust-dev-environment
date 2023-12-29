@@ -7,6 +7,8 @@
 3. Install the recommended vscode extensions ( `ms-vscode-remote.remote-containers` ),
 4. Run the vscode in container by clicking in the bottom left corner and `open in the container`.
 
+Et voilà 🪄✨
+
 ## B - Installed packages
 
 | name | version |

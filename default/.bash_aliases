@@ -14,6 +14,12 @@ build_watch_command() {
   eval to_watch_list=\${$1[*]}
   result=""
 
+  if [ -z "$to_watch_list" ]; then
+    >&2 echo "WARNING: The list of directories to watch is empty"
+    >&2 echo "WARNING: Watching the current directory instead"
+    to_watch_list=[.]
+  fi
+
   for towatch in ${to_watch_list[@]}; do
     if [ ! -d "$towatch" ]; then
       >&2 echo "ERROR: The directory $towatch does not exist"
