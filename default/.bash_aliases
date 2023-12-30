@@ -11,23 +11,22 @@ alias gcr='f() { git checkout -b $1 origin/$1; }; f'
 
 
 build_watch_command() {
-  to_watch_files=$(echo $1 | tr "," "\n")
-  eval to_watch_list=\${$to_watch_files[*]}
+  IFS=","
   result=""
 
-  if [ -z "$to_watch_list" ]; then
+  if [ -z $1 ]; then
     >&2 echo "WARNING: The list of directories to watch is empty"
     >&2 echo "WARNING: Watching the current directory instead"
-    to_watch_list=(.)
+    $1=(.)
   fi
 
-  for towatch in ${to_watch_list[@]}; do
-    if [ ! -d "$towatch" ]; then
-      >&2 echo "ERROR: The directory $towatch does not exist"
+  for element in $1; do
+    if [ ! -d "$element" ]; then
+      >&2 echo "ERROR: The directory $element does not exist"
       return 1
     fi
-    echo "Watching file: $towatch"
-    result="$result --watch $towatch"
+    echo "Watching file: $element"
+    result="$result --watch $element"
   done
 
   return 0
@@ -38,7 +37,7 @@ ws() {
   result=""
   build_watch_command WS_TO_WATCH $result
 
-  cargo watch --quiet --clear $result --exec "run --bin $ws_bin_name"
+  cargo watch --quiet --clear $result --exec "run --bin $WS_BIN_NAME"
 }
 
 wt() {
