@@ -18,7 +18,7 @@ build_watch_command() {
   if [ -z "$to_watch" ]; then
     >&2 echo "WARNING: The list of directories to watch is empty"
     >&2 echo "WARNING: Watching the current directory instead"
-    $to_watch="."
+    to_watch="."
   fi
 
   for element in $to_watch; do
