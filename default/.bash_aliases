@@ -11,16 +11,17 @@ alias gcr='f() { git checkout -b $1 origin/$1; }; f'
 
 
 build_watch_command() {
+  eval "to_watch=\$$1"
   IFS=","
   result=""
 
-  if [ -z $1 ]; then
+  if [ -z $to_watch ]; then
     >&2 echo "WARNING: The list of directories to watch is empty"
     >&2 echo "WARNING: Watching the current directory instead"
-    $1="."
+    $to_watch="."
   fi
 
-  for element in $1; do
+  for element in $to_watch; do
     if [ ! -d "$element" ]; then
       >&2 echo "ERROR: The directory $element does not exist"
       return 1
