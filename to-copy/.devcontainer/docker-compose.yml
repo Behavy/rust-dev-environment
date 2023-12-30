@@ -13,8 +13,8 @@ services:
       - GIT_EMAIL=quentin.lechasles@gmail.com
       - DATABASE_URL=postgres://app_user:dev_only_password@database/app_db
       - WS_BIN_NAME=api
-      # - WS_TO_WATCH=(/workspace/crates/services/api/src/ /workspace/.cargo/ /workspace/crates/libs /workspace/sql /workspace/.cargo/)
-      # - WT_TO_WATCH=(/workspace/crates/services/api/src/ /workspace/.cargo/ /workspace/crates/libs /workspace/sql /workspace/.cargo/)
+      # - WS_TO_WATCH=/workspace/crates/services/api/src/,/workspace/.cargo/,/workspace/crates/libs,/workspace/sql,/workspace/.cargo/
+      # - WT_TO_WATCH=/workspace/crates/services/api/src/,/workspace/.cargo/,/workspace/crates/libs,/workspace/sql,/workspace/.cargo/
       # - EXAMPLES_FOLDER=/workspace/crates/services/api/examples/
     # depends_on:
     #   - database
