@@ -35,14 +35,14 @@ build_watch_command() {
 # Cargo watch
 ws() {
   result=""
-  build_watch_command ws_to_watch $result
+  build_watch_command WS_TO_WATCH $result
 
   cargo watch --quiet --clear $result --exec "run --bin $ws_bin_name"
 }
 
 wt() {
   result=""
-  build_watch_command wt_to_watch $result
+  build_watch_command WT_TO_WATCH $result
 
   if [ -z "$1" ]; then
     cargo watch --quiet --clear $result --exec "test -- --nocapture"
@@ -54,14 +54,14 @@ wt() {
 
 we() {
   result=""
-  build_watch_command ws_to_watch $result
+  build_watch_command WS_TO_WATCH $result
 
   delay_seconds=10
   
-  if [ -z "$1" ] || [ ! -f "/workspace/crates/services/api/examples/$1.rs" ]; then
+  if [ -z "$1" ] || [ ! -f "$EXAMPLES_FOLDER/$1.rs" ]; then
     echo "Please provide the name of the example you want to run"
     echo "Available examples are:"
-    ls /workspace/crates/services/api/examples | sed 's/\.rs//'
+    ls $EXAMPLES_FOLDER | sed 's/\.rs//'
     return 1
   fi
 

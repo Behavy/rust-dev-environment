@@ -9,6 +9,18 @@
 
 Et voilà 🪄✨
 
+### Help - Environment variables
+
+| variable | description |
+|---|---|
+| `GIT_NAME` | Yout git username |
+| `GIT_EMAIL` | Your git email |
+| `DATABASE_URL` | The database url used by the local server, the `db` and the `migrate` commands |
+| `WS_BIN_NAME` | The executed binary using `ws` command |
+| `WS_TO_WATCH` | The watched files using `ws` command |
+| `WT_TO_WATCH` | The watched files using `wt` command |
+| `EXAMPLES_FOLDER` | The example folder's path used by the `we` command |
+
 ## B - Installed packages
 
 | name | version |
@@ -54,22 +66,13 @@ Et voilà 🪄✨
 | `migrate` | todo : sqlx ci migration |
 | `db` | Connect to the postgres db |
 
-## D - Customize the default commands
-
-| variable | description |
-|---|---|
-| `ws_bin_name` | The executed binary using `ws` command |
-| `ws_to_watch` | The watched files using `ws` command |
-| `wt_to_watch` | The watched files using `wt` command |
-| `we_folder` | The example folder's path used by the `we` command |
-
-## E - Create custom aliases
+## D - Create custom aliases
 
 You can add your own aliases by writing them in a `.bash_aliases` file in the `.devcontainer` folder.
 
 It's that simple. :)
 
-## F - Building steps
+## E - Building steps
 
 ### 1. Build and run the docker images
 
