@@ -39,7 +39,7 @@ ws() {
   build_watch_command WS_TO_WATCH $result
 
   echo "cargo watch --quiet --clear $result --exec \"run --bin $WS_BIN_NAME\""
-  eval cargo watch --quiet --clear $result --exec "run --bin $WS_BIN_NAME"
+  eval cargo watch --quiet --clear $result --exec \"run --bin $WS_BIN_NAME\"
 }
 
 wt() {
@@ -74,7 +74,7 @@ we() {
   fi
 
   echo "cargo watch --quiet --clear --watch /workspace/crates/services/api/examples/$1.rs $result --delay $delay_seconds --exec \"run --example $1\""
-  eval cargo watch --quiet --clear --watch /workspace/crates/services/api/examples/$1.rs $result --delay $delay_seconds --exec "run --example $1"
+  eval cargo watch --quiet --clear --watch /workspace/crates/services/api/examples/$1.rs $result --delay $delay_seconds --exec \"run --example $1\"
 }
 
 
