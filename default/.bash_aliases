@@ -15,7 +15,7 @@ build_watch_command() {
   IFS=","
   result=""
 
-  if [ -z $to_watch ]; then
+  if [ -z "$to_watch" ]; then
     >&2 echo "WARNING: The list of directories to watch is empty"
     >&2 echo "WARNING: Watching the current directory instead"
     $to_watch="."
@@ -38,6 +38,7 @@ ws() {
   result=""
   build_watch_command WS_TO_WATCH $result
 
+  echo "cargo watch --quiet --clear $result --exec \"run --bin $WS_BIN_NAME\""
   cargo watch --quiet --clear $result --exec "run --bin $WS_BIN_NAME"
 }
 
@@ -46,8 +47,10 @@ wt() {
   build_watch_command WT_TO_WATCH $result
 
   if [ -z "$1" ]; then
+    echo "cargo watch --quiet --clear $result --exec \"test -- --nocapture\""
     cargo watch --quiet --clear $result --exec "test -- --nocapture"
   else
+    echo "cargo watch --quiet --clear $result --exec \"test $1 -- --nocapture\""
     cargo watch --quiet --clear $result --exec "test $1 -- --nocapture"
   fi
 
@@ -70,6 +73,7 @@ we() {
     delay_seconds=$2
   fi
 
+  echo "cargo watch --quiet --clear --watch /workspace/crates/services/api/examples/$1.rs $result --delay $delay_seconds --exec \"run --example $1\""
   cargo watch --quiet --clear --watch /workspace/crates/services/api/examples/$1.rs $result --delay $delay_seconds --exec "run --example $1"
 }
 
