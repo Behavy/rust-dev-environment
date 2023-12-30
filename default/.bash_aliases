@@ -11,7 +11,8 @@ alias gcr='f() { git checkout -b $1 origin/$1; }; f'
 
 
 build_watch_command() {
-  eval to_watch_list=\${$1[*]}
+  to_watch_files=$(echo $1 | tr "," "\n")
+  eval to_watch_list=\${$to_watch_files[*]}
   result=""
 
   if [ -z "$to_watch_list" ]; then
