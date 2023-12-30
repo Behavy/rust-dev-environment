@@ -53,6 +53,7 @@ RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain $RUST_VERSI
 RUN rustup component add rust-src
 
 RUN cargo install cargo-watch
+RUN cargo install cargo-udeps
 RUN cargo install sqlx-cli --no-default-features --features postgres
 
 

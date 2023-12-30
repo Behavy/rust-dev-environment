@@ -30,6 +30,8 @@ Et voilà 🪄✨
 | postgres-client | latest |
 | rustup | latest |
 | cargo | latest |
+| cargo-watch | latest |
+| cargo-udeps | latest |
 | sqlx-cli | latest |
 
 ## C - Custom commands
@@ -58,6 +60,7 @@ Et voilà 🪄✨
 | `ws` | watch the server |
 | `wt (test)` | Run the given test or all of them if none is given |
 | `we (example)` | Run the given example |
+| `udeps` | Show unused dependencies |
 
 ### 4. Database
 

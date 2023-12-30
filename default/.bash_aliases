@@ -9,6 +9,9 @@ alias gcam='git commit -a -m'
 alias gcb='git checkout -b'
 alias gcr='f() { git checkout -b $1 origin/$1; }; f'
 
+# Rust aliases.
+alias udeps='cargo +nightly udeps'
+
 
 build_watch_command() {
   eval "to_watch=\$$1"
