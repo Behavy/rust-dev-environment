@@ -51,6 +51,7 @@ RUN dpkg-reconfigure locales
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain $RUST_VERSION
 
 RUN rustup component add rust-src
+RUN rustup toolchain install nightly
 
 RUN cargo install cargo-watch
 RUN cargo install cargo-udeps
