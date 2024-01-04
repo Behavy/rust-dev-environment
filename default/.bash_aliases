@@ -51,10 +51,10 @@ wt() {
 
   if [ -z "$1" ]; then
     echo "cargo watch --quiet --clear $result --exec \"test -- --nocapture\""
-    cargo watch --quiet --clear $result --exec "test -- --nocapture"
+    cargo watch --quiet --clear $result --exec \"test -- --nocapture\"
   else
     echo "cargo watch --quiet --clear $result --exec \"test $1 -- --nocapture\""
-    eval cargo watch --quiet --clear $result --exec "test $1 -- --nocapture"
+    eval cargo watch --quiet --clear $result --exec \"test $1 -- --nocapture\"
   fi
 
 }
