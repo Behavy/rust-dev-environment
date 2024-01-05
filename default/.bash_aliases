@@ -83,5 +83,5 @@ we() {
 
 
 # Database
-alias sqlx='dbmate --no-dump-schema --migrations-dir /workspace/sql/migrations'
+alias migrate='dbmate --no-dump-schema --migrations-dir /workspace/sql/migrations'
 alias db='psql $DATABASE_URL'

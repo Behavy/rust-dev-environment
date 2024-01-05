@@ -9,6 +9,8 @@ ENV RUSTUP_HOME=/usr/local/.rustup
 ENV CARGO_HOME=/usr/local/.cargo
 ENV RUST_VERSION=1.74.0
 
+ENV DBMATE_VERSION=2.10.0
+
 ENV WORKSPACE_HOME=/workspace
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -39,6 +41,10 @@ RUN apt -y install postgresql-client
 RUN apt autoremove -y
 RUN apt clean -y     
 RUN rm -r /var/cache/* /var/lib/apt/lists/*     
+# Install dbmate
+RUN curl -fsSL -o /usr/local/bin/dbmate https://github.com/amacneil/dbmate/releases/download/v$DBMATE_VERSION/dbmate-linux-amd64
+RUN mv ./dbmate-linux-amd64 /usr/bin/dbmate 
+RUN chmod +x /usr/bin/dbmate
 
 
 # Set locale
@@ -55,7 +61,6 @@ RUN rustup toolchain install nightly
 
 RUN cargo install cargo-watch
 RUN cargo install cargo-udeps
-RUN cargo install sqlx-cli --no-default-features --features postgres
 
 
 # User setup
