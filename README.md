@@ -32,7 +32,7 @@ Et voilà 🪄✨
 | cargo | latest |
 | cargo-watch | latest |
 | cargo-udeps | latest |
-| sqlx-cli | latest |
+| dbmate | 2.10.0 |
 
 ## C - Custom commands
 
@@ -66,7 +66,7 @@ Et voilà 🪄✨
 
 | command | description |
 |---|---|
-| `migrate` | todo : sqlx ci migration |
+| `migrate` | Execute the DBMATE migration command based on the /workspace/sql/migrations folder |
 | `db` | Connect to the postgres db |
 
 ## D - Create custom aliases
