@@ -43,7 +43,7 @@ RUN apt clean -y
 RUN rm -r /var/cache/* /var/lib/apt/lists/*     
 # Install dbmate
 RUN curl -fsSL -o /usr/local/bin/dbmate https://github.com/amacneil/dbmate/releases/download/v$DBMATE_VERSION/dbmate-linux-amd64
-RUN chmod +x /usr/bin/dbmate
+RUN sudo chmod +x /usr/local/bin/dbmate
 
 
 # Set locale
